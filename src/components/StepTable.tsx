@@ -31,20 +31,24 @@ function Row({
     <tr
       ref={rowRef}
       onClick={onSelect}
-      className={`cursor-pointer active:brightness-95 ${
-        isCurrent ? 'bg-indigo-50' : 'bg-white'
-      } ${isSelected ? 'outline outline-2 -outline-offset-1 outline-indigo-400' : ''}`}
+      className={`cursor-pointer transition-colors active:brightness-110 ${
+        isSelected
+          ? 'bg-amber-500/10 outline outline-1 -outline-offset-1 outline-amber-500/50'
+          : isCurrent
+            ? 'bg-indigo-500/10'
+            : 'hover:bg-slate-800/50'
+      }`}
     >
-      <td className="py-2 pl-3 pr-2 text-right font-mono text-sm tabular-nums text-gray-400">
+      <td className="py-2.5 pl-4 pr-2 text-right font-mono text-xs tabular-nums text-slate-600">
         {index}
       </td>
-      <td className="px-3 py-2 text-right font-mono text-sm tabular-nums text-gray-700">
+      <td className="px-3 py-2.5 text-right font-mono text-sm tabular-nums text-slate-300">
         {row.effective.toFixed(2)}
       </td>
-      <td className="px-3 py-2 text-right font-mono text-sm tabular-nums text-gray-700">
+      <td className={`px-3 py-2.5 text-right font-mono text-sm tabular-nums ${isCurrent || isSelected ? 'text-white' : 'text-slate-300'}`}>
         {row.best.outer.toFixed(2)}
       </td>
-      <td className="py-2 pl-3 pr-3 text-right font-mono text-sm tabular-nums text-gray-700">
+      <td className={`py-2.5 pl-3 pr-4 text-right font-mono text-sm tabular-nums ${isCurrent || isSelected ? 'text-white' : 'text-slate-300'}`}>
         {formatInner(row.best.inner)}
       </td>
     </tr>
@@ -59,26 +63,26 @@ export function StepTable({ rows, selectedStep, onSelectStep }: Props) {
   }, [])
 
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white">
+    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-800 bg-slate-900">
       <div className="flex-1 overflow-y-auto">
         <table className="w-full border-collapse">
-          <thead className="sticky top-0 z-10 bg-gray-50 shadow-[0_1px_0_0_#e5e7eb]">
-            <tr>
-              <th className="py-2 pl-3 pr-2 text-right text-xs font-semibold uppercase tracking-wide text-gray-400">
+          <thead className="sticky top-0 z-10 bg-slate-950">
+            <tr className="border-b border-slate-800">
+              <th className="py-2.5 pl-4 pr-2 text-right text-xs font-semibold uppercase tracking-widest text-slate-600">
                 #
               </th>
-              <th className="px-3 py-2 text-right text-xs font-semibold uppercase tracking-wide text-gray-400">
+              <th className="px-3 py-2.5 text-right text-xs font-semibold uppercase tracking-widest text-slate-600">
                 Setting
               </th>
-              <th className="px-3 py-2 text-right text-xs font-semibold uppercase tracking-wide text-gray-400">
+              <th className="px-3 py-2.5 text-right text-xs font-semibold uppercase tracking-widest text-slate-600">
                 Outer
               </th>
-              <th className="py-2 pl-3 pr-3 text-right text-xs font-semibold uppercase tracking-wide text-gray-400">
+              <th className="py-2.5 pl-3 pr-4 text-right text-xs font-semibold uppercase tracking-widest text-slate-600">
                 Inner
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-slate-800/60">
             {rows.map((row, i) => {
               const isCurrent = row.step === 0
               const isSelected = row.step === selectedStep
@@ -97,9 +101,10 @@ export function StepTable({ rows, selectedStep, onSelectStep }: Props) {
           </tbody>
         </table>
       </div>
-      <div className="flex-none border-t border-gray-100 px-3 py-2">
-        <span className="flex items-center gap-1 text-xs text-gray-400">
-          <span className="inline-block h-3 w-3 rounded-sm bg-indigo-100" /> current position
+      <div className="flex-none border-t border-slate-800 px-4 py-2.5">
+        <span className="flex items-center gap-2 text-xs text-slate-600">
+          <span className="inline-block h-2.5 w-2.5 rounded-sm bg-indigo-500/30 ring-1 ring-indigo-500/50" />
+          current position
         </span>
       </div>
     </div>

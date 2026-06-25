@@ -31,10 +31,15 @@ export function App() {
   }
 
   return (
-    <div className="mx-auto flex h-svh max-w-md flex-col bg-gray-50">
-      <div className="flex-none flex flex-col gap-3 p-4 pb-2">
-        <h1 className="text-lg font-bold text-gray-900">Fellow Opus Grind Calculator</h1>
-        <div className="flex rounded-xl bg-gray-200 p-1">
+    <div className="mx-auto flex h-svh max-w-md flex-col bg-slate-950">
+      {/* Header */}
+      <div className="flex-none px-4 pb-3 pt-5">
+        <h1 className="mb-4 text-xl font-bold tracking-tight text-white">
+          Fellow Opus
+          <span className="ml-2 text-slate-500">Grind Calculator</span>
+        </h1>
+        {/* Tab switcher */}
+        <div className="flex rounded-xl bg-slate-800 p-1">
           {(['adjust', 'table'] as Tab[]).map((t) => (
             <button
               key={t}
@@ -42,8 +47,8 @@ export function App() {
               onClick={() => setTab(t)}
               className={`flex-1 rounded-lg py-2 text-sm font-semibold transition-colors ${
                 tab === t
-                  ? 'bg-white text-gray-900 shadow-sm'
-                  : 'text-gray-500 active:text-gray-700'
+                  ? 'bg-amber-500 text-slate-950'
+                  : 'text-slate-400 active:text-slate-200'
               }`}
             >
               {t === 'adjust' ? 'Adjust' : 'Step Table'}
@@ -53,7 +58,7 @@ export function App() {
       </div>
 
       {tab === 'adjust' ? (
-        <div className="flex flex-col gap-3 p-4 pt-0">
+        <div className="flex flex-col gap-3 px-4 pb-4">
           <RingControls
             displayConfig={displayConfig}
             isTarget={isTarget}
@@ -67,12 +72,12 @@ export function App() {
             position={position}
             onStepChange={setTargetStep}
           />
-          <p className="pt-1 text-center text-xs text-gray-400">
+          <p className="pt-1 text-center text-xs text-slate-600">
             Not affiliated with Fellow Products
           </p>
         </div>
       ) : (
-        <div className="flex flex-1 flex-col overflow-hidden p-4 pt-0">
+        <div className="flex flex-1 flex-col overflow-hidden px-4 pb-4">
           <StepTable
             rows={fullRows}
             selectedStep={targetStep}

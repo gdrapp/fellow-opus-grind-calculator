@@ -20,41 +20,42 @@ export function TargetSelector({ rows, targetStep, position, onStepChange }: Pro
   const row: StepRow | undefined = rows.find((r) => r.step === targetStep)
   const innerChanges = row ? row.best.inner !== position.inner : false
 
+  const labelColor =
+    targetStep === 0
+      ? 'text-slate-500'
+      : innerChanges
+        ? 'text-amber-400'
+        : 'text-emerald-400'
+
   return (
-    <div className="flex flex-col items-center gap-3 rounded-xl border border-gray-200 bg-white p-4">
+    <div className="flex flex-col items-center gap-4 rounded-2xl border border-slate-800 bg-slate-900 p-5">
       <div className="flex w-full items-center justify-between">
-        <span className="text-sm font-semibold uppercase tracking-wide text-gray-400">
+        <span className="text-xs font-semibold uppercase tracking-widest text-slate-500">
           Target
         </span>
-        <span
-          className={`text-xs font-medium ${
-            targetStep === 0
-              ? 'text-indigo-500'
-              : innerChanges
-                ? 'text-amber-600'
-                : 'text-green-600'
-          }`}
-        >
+        <span className={`text-xs font-semibold ${labelColor}`}>
           {stepLabel(targetStep)}
         </span>
       </div>
 
-      <div className="flex w-full items-center justify-between gap-3">
+      <div className="flex w-full items-center justify-between gap-4">
         <button
           type="button"
           onClick={() => onStepChange(targetStep - 1)}
           disabled={targetStep <= minStep}
           aria-label="One step finer"
-          className="flex min-h-11 min-w-11 items-center justify-center rounded-lg bg-gray-100 text-xl font-bold text-gray-700 active:bg-gray-200 disabled:opacity-30"
+          className="flex min-h-12 min-w-12 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 text-2xl font-bold text-slate-200 active:bg-slate-700 disabled:opacity-25"
         >
           −
         </button>
 
         <div className="text-center">
-          <div className="font-mono text-3xl font-bold tabular-nums text-gray-900">
+          <div className="font-mono text-5xl font-bold tabular-nums tracking-tight text-white">
             {row ? row.effective.toFixed(2) : '—'}
           </div>
-          <div className="mt-0.5 text-xs text-gray-400">effective setting</div>
+          <div className="mt-1 text-xs font-medium uppercase tracking-widest text-slate-600">
+            effective setting
+          </div>
         </div>
 
         <button
@@ -62,7 +63,7 @@ export function TargetSelector({ rows, targetStep, position, onStepChange }: Pro
           onClick={() => onStepChange(targetStep + 1)}
           disabled={targetStep >= maxStep}
           aria-label="One step coarser"
-          className="flex min-h-11 min-w-11 items-center justify-center rounded-lg bg-gray-100 text-xl font-bold text-gray-700 active:bg-gray-200 disabled:opacity-30"
+          className="flex min-h-12 min-w-12 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 text-2xl font-bold text-slate-200 active:bg-slate-700 disabled:opacity-25"
         >
           +
         </button>

@@ -38,19 +38,19 @@ function Stepper({
 }: StepperProps) {
   return (
     <div className="flex items-center gap-3 py-1">
-      <span className="w-24 shrink-0 text-sm font-medium text-gray-500">{label}</span>
+      <span className="w-24 shrink-0 text-sm font-medium text-slate-400">{label}</span>
       <button
         type="button"
         onClick={onDecrement}
         disabled={!canDecrement}
         aria-label={`Decrease ${label}`}
-        className="flex min-h-11 min-w-11 items-center justify-center rounded-lg bg-gray-100 text-xl font-bold text-gray-700 active:bg-gray-200 disabled:opacity-30"
+        className="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 text-xl font-bold text-slate-200 active:bg-slate-700 disabled:opacity-25"
       >
         −
       </button>
       <span
         className={`w-14 text-center font-mono text-xl font-semibold tabular-nums ${
-          highlight ? 'text-amber-600' : 'text-gray-900'
+          highlight ? 'text-amber-400' : 'text-white'
         }`}
       >
         {display}
@@ -60,7 +60,7 @@ function Stepper({
         onClick={onIncrement}
         disabled={!canIncrement}
         aria-label={`Increase ${label}`}
-        className="flex min-h-11 min-w-11 items-center justify-center rounded-lg bg-gray-100 text-xl font-bold text-gray-700 active:bg-gray-200 disabled:opacity-30"
+        className="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 text-xl font-bold text-slate-200 active:bg-slate-700 disabled:opacity-25"
       >
         +
       </button>
@@ -79,15 +79,15 @@ export function RingControls({
 
   return (
     <div
-      className={`flex flex-col gap-2 rounded-xl border p-4 ${
+      className={`flex flex-col gap-2 rounded-2xl border p-4 ${
         isTarget && innerChanges
-          ? 'border-amber-200 bg-amber-50'
+          ? 'border-amber-800 bg-amber-950/40'
           : isTarget
-            ? 'border-green-200 bg-green-50'
-            : 'border-gray-200 bg-white'
+            ? 'border-emerald-800 bg-emerald-950/40'
+            : 'border-slate-800 bg-slate-900'
       }`}
     >
-      <h2 className="mb-1 text-sm font-semibold uppercase tracking-wide text-gray-400">
+      <h2 className="mb-1 text-xs font-semibold uppercase tracking-widest text-slate-500">
         {isTarget ? 'Set rings to' : 'Current position'}
       </h2>
       <Stepper
@@ -109,7 +109,7 @@ export function RingControls({
         highlight={isTarget && innerChanges}
       />
       {isTarget && innerChanges && (
-        <p className="mt-1 text-xs text-amber-600">⚠ Inner ring must change</p>
+        <p className="mt-1 text-xs text-amber-500">⚠ Inner ring must change</p>
       )}
     </div>
   )
