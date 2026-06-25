@@ -68,3 +68,19 @@ export function buildStepTable(currentEffective: number, current: Config): StepR
   }
   return rows
 }
+
+export function buildFullTable(current: Config): StepRow[] {
+  const k0 = effectiveToK(current.outer + current.inner / 6)
+  const rows: StepRow[] = []
+  for (let k = 0; k <= 144; k++) {
+    const ranked = rankConfigs(k, current)
+    if (ranked.length === 0) continue
+    rows.push({
+      step: k - k0,
+      effective: kToEffective(k),
+      best: ranked[0],
+      alt: ranked.length > 1 ? ranked[1] : null,
+    })
+  }
+  return rows
+}
